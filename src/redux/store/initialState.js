@@ -1,4 +1,4 @@
 export default {
-	stuff: '',
+	footerVisible: '',
 	sideOpen: false
 };

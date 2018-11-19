@@ -4,10 +4,14 @@ function url() {
   return 'www.url.com';
 }
 
-export function receiveStuff(json) {
-  return {type: types.RECEIVE_STUFF, stuff: json.stuff};
+export function closeSidenav() {
+  return {type: types.TOGGLE_SIDENAV, payload: false};
 }
 
-export function fetchStuff() {
-  return {type: types.FETCH_STUFF, payload: true};
+export function openSidenav() {
+  return {type: types.TOGGLE_SIDENAV, payload: true};
 }
+
+// export function toggleSidenav(open = true) {
+//   return {type: types.FETCH_STUFF, payload: open};
+// }

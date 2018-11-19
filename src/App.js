@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
-import './App.css';
+
+//router
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+//redux things
+import { connect } from 'react-redux';
+
+import {bindActionCreators} from 'redux';
+import * as actions from './redux/actions/actions.js';
+
+import './styles/main.sass';
 import Nav from './components/layouts/Nav.js';
 import Footer from './components/layouts/Footer.js';
+
+//Router
+import routes from './router/routes.js'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Nav />
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        <Footer />
-      </div>
+      <Router onUpdate={() => window.scrollTo(0, 0)}>
+        <div className="App">
+          <Nav sideOpen={this.props.stuff.sideOpen} />
+          <div className="main">
+            <span onClick={this.props.actions.fetchStuff }>Action</span>
+            {routes}
+          </div>
+          <Footer />
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+ ...state
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

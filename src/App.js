@@ -56,16 +56,15 @@ class App extends Component {
                 <Route path="/" 
                   exact 
                   render={(props) => <Home {...props} userIntent={this.props.layout.userIntent} />}
-                 userIntent={this.props.layout.userIntent} />
-                 <Route path="/about" component={About} />
-
-                <Route path="/show/new" component={NewShow} />
-                <Route path="/shows/list" component={IndexShows} />
-                 <Route path="/show/:showId" component={ShowPage} />
-                <Route path="/search/:searchArea" component={Search} />
-
+                userIntent={this.props.layout.userIntent} />
+                <Route path="/about" component={About} />
                 <Route path="/show/edit/:showId" component={EditShow} />
-                
+
+                <Route exact path="/show/new" component={NewShow} />
+                <Route exact path="/shows/list" component={IndexShows} />
+                <Route exact path="/show/:showId" component={ShowPage} />
+                <Route exact path="/search/:searchArea" component={Search} />
+
                 <Route path="*" component={Missing} />
               </Switch>
             </div>

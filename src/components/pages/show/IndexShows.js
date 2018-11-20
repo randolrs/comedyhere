@@ -11,7 +11,9 @@ class IndexShows extends Component {
 		return (
 			<div className="content">
 				<div className="show-page">
-					<header>Index Shows</header>
+					<header>My Favorite Shows</header>
+					<Shows shows={showsData} stacked={true}/>
+					<header>Shows I Added</header>
 					<Shows shows={showsData} stacked={true}/>
 				</div>
 			</div>

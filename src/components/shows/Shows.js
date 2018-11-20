@@ -1,6 +1,5 @@
 import React from 'react';
 import Show from './Show.js'
-import styles from './shows.sass'
 
 function Shows(props) {
 	return (

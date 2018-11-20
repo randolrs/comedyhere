@@ -15,7 +15,7 @@ import Footer from './components/layouts/Footer.js';
 import ScrollToTop from './components/layouts/ScrollToTop.js';
 
 //Router
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from './components/pages/home/Home.js'
 import ShowPage from './components/pages/show/Show.js'

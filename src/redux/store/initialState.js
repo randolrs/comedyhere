@@ -1,4 +1,5 @@
 export default {
 	footerVisible: '',
-	sideOpen: false
+	sideOpen: false,
+	userIntent: null
 };

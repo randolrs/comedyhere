@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 
-//router
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
 //redux things
 import { connect } from 'react-redux';
 
@@ -18,32 +15,46 @@ import Footer from './components/layouts/Footer.js';
 import ScrollToTop from './components/layouts/ScrollToTop.js';
 
 //Router
-import routes from './router/routes.js'
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+
+import Home from './components/pages/home/Home.js'
+import About from './components/pages/about/About.js'
+import Missing from './components/missing/Missing.js'
 
 class App extends Component {
   constructor(props) {
     super(props);
+    // let _showUserIntentModal = (this.props.layout.userIntent === null);
+    // this.state = {date: new Date(), showUserIntentModal: _showUserIntentModal};
+    
     this.toggleSidenav = this.toggleSidenav.bind(this);
+
   }
-  componentDidUpdate() {
+  componentWillMount() {
+
+  }
+  componentDidMount() {
 
   }
   toggleSidenav() {
     this.props.layout.sideOpen ? this.props.actions.closeSidenav() : this.props.actions.openSidenav();
   }
-  routerUpdate() {
-    alert('routerUpdate')
-    window.scrollTo(0, 0)
-  }
   render() {
     return (
-      <Router onUpdate={() => {this.routerUpdate()}}>
+      <Router>
         <ScrollToTop>
           <div className={"App" + (this.props.layout.sideOpen ? ' sideOpen' : '')}>
             <Nav sideOpen={this.props.layout.sideOpen} toggleSidenav={this.toggleSidenav} />
             <div className="main">
               <span>Action</span>
-              {routes}
+              <Switch>
+                <Route path="/" 
+                  exact 
+                  render={(props) => <Home {...props} userIntent={this.props.layout.userIntent} />}
+                 userIntent={this.props.layout.userIntent} />
+                <Route path="/about" component={About} />
+                <Route path="*" component={Missing} />
+              </Switch>
             </div>
             <Footer />
           </div>

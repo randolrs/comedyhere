@@ -21,6 +21,7 @@ import Home from './components/pages/home/Home.js'
 import ShowPage from './components/pages/show/Show.js'
 import NewShow from './components/pages/show/NewShow.js'
 import EditShow from './components/pages/show/EditShow.js'
+import IndexShows from './components/pages/show/IndexShows.js'
 import Search from './components/pages/search/Search.js'
 import About from './components/pages/about/About.js'
 import Missing from './components/missing/Missing.js'
@@ -56,11 +57,15 @@ class App extends Component {
                   exact 
                   render={(props) => <Home {...props} userIntent={this.props.layout.userIntent} />}
                  userIntent={this.props.layout.userIntent} />
-                <Route path="/search/:searchArea" component={Search} />
+                 <Route path="/about" component={About} />
+
                 <Route path="/show/new" component={NewShow} />
+                <Route path="/shows/list" component={IndexShows} />
+                 <Route path="/show/:showId" component={ShowPage} />
+                <Route path="/search/:searchArea" component={Search} />
+
                 <Route path="/show/edit/:showId" component={EditShow} />
-                <Route path="/show/:showId" component={ShowPage} />
-                <Route path="/about" component={About} />
+                
                 <Route path="*" component={Missing} />
               </Switch>
             </div>

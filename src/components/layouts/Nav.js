@@ -18,6 +18,9 @@ class Nav extends Component {
 					</Link>
 				</div>
 				<div className="nav__right">
+					<Link to="/shows/list" className="nav__link">
+						<span>My Shows</span>
+					</Link>
 					<Link to="/show/new" className="nav__link">
 						<span>Add a Show</span>
 					</Link>

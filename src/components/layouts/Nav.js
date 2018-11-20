@@ -13,13 +13,13 @@ class Nav extends Component {
 				<span className="nav__link" onClick={this.props.toggleSidenav}>
 					<span>Toggle</span>
 				</span>
-					<Link to="/" className="nav__link">
-						<span>Nav</span>
+					<Link to="/" className="nav__link clear-link">
+						<span>ComedyHere</span>
 					</Link>
 				</div>
 				<div className="nav__right">
-					<Link to="/about" className="nav__link">
-						<span>About</span>
+					<Link to="/show/new" className="nav__link">
+						<span>Add a Show</span>
 					</Link>
 				</div>
 

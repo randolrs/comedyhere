@@ -8,8 +8,8 @@ const timesOfShows = [
 		value: 'tomorrow'
 	},
 	{
-		label: 'This Week',
-		value: 'week'
+		label: 'This Weekend',
+		value: 'weekend'
 	},
 	{
 		label: 'Anytime',

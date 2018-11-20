@@ -3,6 +3,8 @@ import UserIntentModal from '../../user-intent/UserIntentBlankStateModal.js'
 
 import Shows from '../../shows/Shows.js'
 
+let showsData = [{}, {}, {}];
+
 class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -29,7 +31,8 @@ class Home extends Component {
 					this.state.showUserIntentModal ? <UserIntentModal updateUserIntent={this.updateUserIntent} /> : null
 				}
 				
-				<Shows />
+				<Shows shows={showsData} stacked={true}/>
+				<Shows shows={showsData} stacked={false}/>
 			</div>
 		);
 	}

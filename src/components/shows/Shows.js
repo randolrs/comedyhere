@@ -5,11 +5,12 @@ import styles from './shows.sass'
 function Shows(props) {
 	return (
 		<div className="shows-container">
-			<span>Shows</span>
-			<div className="shows">
-				<Show />
-				<Show />
-				<Show />
+			<div className={'shows' + (props.stacked ? ' stacked' : '')}>
+				{
+					props.shows.map((elem) => {
+						return <Show stacked={props.stacked} />
+					})
+				}
 			</div>
 		</div>
 	);

@@ -1,6 +1,9 @@
 .shows
 	display: flex
 	text-align: center
+	&.stacked
+		display: block
+		padding: 0px 15px
 
 .show
 	flex: 1
@@ -14,3 +17,16 @@
 		&__data
 			padding: 10px
 			text-align: left
+	&.stacked
+		flex: auto
+		display: block
+		padding: 0px
+		margin-bottom: 15px
+		&:last-child
+			margin-bottom: 0px
+		.show__content
+			display: flex
+			&__img
+				width: 200px
+			&__data
+				flex: 1

@@ -20,7 +20,7 @@ const Input = (props) => {
 
 Input.propTypes = {
   name: PropTypes.string,
-  title: PropTypes.title
+  title: PropTypes.string
 };
 
 export default Input;

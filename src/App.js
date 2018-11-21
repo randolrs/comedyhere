@@ -20,7 +20,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from './components/pages/home/Home.js'
 import ShowPage from './components/pages/show/Show.js'
 import NewShow from './components/pages/show/NewShow.js'
-import EditShow from './components/pages/show/EditShow.js'
 import IndexShows from './components/pages/show/IndexShows.js'
 import Search from './components/pages/search/Search.js'
 import About from './components/pages/about/About.js'
@@ -57,7 +56,7 @@ class App extends Component {
                   render={(props) => <Home {...props} userIntent={this.props.layout.userIntent} />}
                 userIntent={this.props.layout.userIntent} />
                 <Route path="/about" component={About} />
-                <Route path="/show/edit/:showId" component={EditShow} />
+                <Route path="/show/edit/:showId" component={NewShow} />
 
                 <Route exact path="/show/new" component={NewShow} />
                 <Route exact path="/shows/list" component={IndexShows} />

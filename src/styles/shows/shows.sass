@@ -8,6 +8,7 @@
 .show
 	flex: 1
 	padding: 15px
+	transition: 0.5s
 	&__content
 		border-radius: 3px
 		border: 1px solid #e0e0e0
@@ -30,3 +31,6 @@
 				width: 200px
 			&__data
 				flex: 1
+	&.removed
+		height: 0px
+		opacity: 0

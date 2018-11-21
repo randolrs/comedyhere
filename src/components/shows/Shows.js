@@ -1,5 +1,5 @@
 import React from 'react';
-import Show from './Show.js'
+import Show from './ShowComp.js'
 
 function Shows(props) {
 	return (

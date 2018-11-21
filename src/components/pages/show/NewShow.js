@@ -6,20 +6,22 @@ import Input from '../../forms/Input.js';
 class NewShow extends Component {
 	constructor(props) {
 		super(props);
+		let editMode = this.props.match.params.showId ? true : false;
 		this.state = {
-			newShow: {
-				title: null,
-				description: null,
-				eventURL: null,
-				venueName: null,
-				address: null,
-				videoPreview: null,
-				videoDescription: null,
-				reasonRecommend: null
+			showParams: {
+				title: '',
+				description: '',
+				eventURL: '',
+				venueName: '',
+				address: '',
+				videoPreview: '',
+				videoDescription: '',
+				reasonRecommend: ''
 			},
-			saving: false
+			saving: false,
+			editMode: editMode,
+			ready: !editMode //need to get editable show params still
 		}
-
 		this.handleTitleUpdate = this.handleTitleUpdate.bind(this);
 		this.handleDescriptionUpdate = this.handleDescriptionUpdate.bind(this);
 		this.handleEventURLUpdate = this.handleEventURLUpdate.bind(this);
@@ -32,68 +34,102 @@ class NewShow extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
+
+	async componentDidMount() {
+		if(this.state.editMode) {
+			let _showId = this.props.match.params.showId;
+			await axios.get('https://comedyhere-server.herokuapp.com/api/shows/' + _showId, { crossdomain: true }).then(res => {
+				// this.setState({show: res.data})
+				console.log(res.data)
+				this.setState( prevState => ({ showParams: 
+        			{...res.data}
+      			}))
+      			this.setState({ready: true});
+			})
+			.catch(e => {
+				console.log(e)
+				alert("error")
+				this.setState({loadPending: false})
+			})
+		}
+		
+	}
 	handleSubmit (e) {
 		e.preventDefault();
 		let self = this;
 		// this.setState({saving: true});
-		let _newShow = this.state.newShow;
-		axios.post('https://comedyhere-server.herokuapp.com/api/shows/', _newShow).then(res => {
-			alert('saved')
-			// self.setState({saving: false});
-		})
-		.catch(e => {
-			console.log(e)
-			alert("error")
-			// self.setState({saving: false});
-		})
+		let _showParams = this.state.showParams;
 
+		if(this.state.editMode) {
+			let _showId = this.props.match.params.showId;
+			axios.patch('https://comedyhere-server.herokuapp.com/api/shows/' + _showId, _showParams).then(res => {
+				console.log(res)
+				alert('updated')
+				// self.setState({saving: false});
+			})
+			.catch(e => {
+				console.log(e.response)
+				alert("error")
+				// self.setState({saving: false});
+			})
+		} else {
+			axios.post('https://comedyhere-server.herokuapp.com/api/shows/', _showParams).then(res => {
+				alert('saved')
+				// self.setState({saving: false});
+			})
+			.catch(e => {
+				console.log(e)
+				alert("error")
+				// self.setState({saving: false});
+			})
+		}
 	}
 	handleTitleUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, title: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, title: value}
       	}))
 	}
 	handleDescriptionUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, description: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, description: value}
       	}))
 	}
 	handleEventURLUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, eventURL: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, eventURL: value}
       	}))
 	}
 	handleVenueNameUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, venueName: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, venueName: value}
       	}))
 	}
 	handleAddressUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, address: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, address: value}
       	}))
 	}
 	handleVideoPreviewUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, videoPreview: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, videoPreview: value}
       	}))
 	}
 	handleVideoDescriptionUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, videoDescription: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, videoDescription: value}
       	}))
 	}
 	handleReasonRecommendUpdate(e) {
 		let value = e.target.value;
-		this.setState( prevState => ({ newShow : 
-        	{...prevState.newShow, reasonRecommend: value}
+		this.setState( prevState => ({ showParams : 
+        	{...prevState.showParams, reasonRecommend: value}
       	}))
 	}
 	render() {
@@ -101,66 +137,74 @@ class NewShow extends Component {
 			<div className="content">
 				<div className="show-page">
 					<header>New Show</header>
-					<form onSubmit={this.handleSubmit}>
-						<Input
-							title={'Title'}
-							name={'title'}
-							type={'text'}
-							value={this.state.title}
-							handleChange={this.handleTitleUpdate}
-						/>
-						<Input
-							title={'Description'}
-							name={'description'}
-							type={'text'}
-							value={this.state.description}
-							handleChange={this.handleDescriptionUpdate}
-						/>
-						<Input
-							title={'Event URL'}
-							name={'eventURL'}
-							type={'text'}
-							value={this.state.eventURL}
-							handleChange={this.handleEventURLUpdate}
-						/>
-						<Input
-							title={'Venue Name'}
-							name={'venueName'}
-							type={'text'}
-							value={this.state.venueName}
-							handleChange={this.handleVenueNameUpdate}
-						/>
-						<Input
-							title={'Venue Address'}
-							name={'address'}
-							type={'text'}
-							value={this.state.address}
-							handleChange={this.handleAddressUpdate}
-						/>
+					{
+						this.state.ready ? 
+						<form onSubmit={this.handleSubmit}>
+							<Input
+								title={'Title'}
+								name={'title'}
+								type={'text'}
+								value={this.state.showParams.title || ''}
+								handleChange={this.handleTitleUpdate}
+							/>
+							<Input
+								title={'Description'}
+								name={'description'}
+								type={'text'}
+								value={this.state.showParams.description || ''}
+								handleChange={this.handleDescriptionUpdate}
+							/>
+							<Input
+								title={'Event URL'}
+								name={'eventURL'}
+								type={'text'}
+								value={this.state.showParams.eventURL || ''}
+								handleChange={this.handleEventURLUpdate}
+							/>
+							<Input
+								title={'Venue Name'}
+								name={'venueName'}
+								type={'text'}
+								value={this.state.showParams.venueName || ''}
+								handleChange={this.handleVenueNameUpdate}
+							/>
+							<Input
+								title={'Venue Address'}
+								name={'address'}
+								type={'text'}
+								value={this.state.showParams.address || ''}
+								handleChange={this.handleAddressUpdate}
+							/>
 
-						<Input
-							title={'Video Preview'}
-							name={'videoPreview'}
-							type={'text'}
-							value={this.state.videoPreview}
-							handleChange={this.handleVideoPreviewUpdate}
-						/>
-						<Input
-							title={'Video Description'}
-							name={'videoDescription'}
-							type={'text'}
-							value={this.state.videoDescription}
-							handleChange={this.handleVideoDescriptionUpdate}
-						/>
-						<Input
-							title={'Reason We Recommend'}
-							name={'reasonRecommend'}
-							type={'text'}
-							value={this.state.reasonRecommend}
-							handleChange={this.handleReasonRecommendUpdate}
-						/>
-						<button className="btn" onClick={this.handleSubmit}>Add Show</button>
-					</form>
+							<Input
+								title={'Video Preview'}
+								name={'videoPreview'}
+								type={'text'}
+								value={this.state.showParams.videoPreview || ''}
+								handleChange={this.handleVideoPreviewUpdate}
+							/>
+							<Input
+								title={'Video Description'}
+								name={'videoDescription'}
+								type={'text'}
+								value={this.state.showParams.videoDescription || ''}
+								handleChange={this.handleVideoDescriptionUpdate}
+							/>
+							<Input
+								title={'Reason We Recommend'}
+								name={'reasonRecommend'}
+								type={'text'}
+								value={this.state.showParams.reasonRecommend || ''}
+								handleChange={this.handleReasonRecommendUpdate}
+							/>
+							<button className="btn" onClick={this.handleSubmit}>
+								{
+									this.state.editMode ? 'Update Show' : 'Add Show'
+								}
+							</button>
+						</form>
+						: null
+					}
 					<div>New Show Form</div>
 				</div>
 			</div>

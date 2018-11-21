@@ -13,7 +13,9 @@ class ShowPage extends Component {
 		}
 	}
 	componentDidMount() {
-		axios.get('https://comedyhere-server.herokuapp.com/api/shows/5bf588538ed49028e4bcda35', { crossdomain: true }).then(res => {
+		let _showId = this.props.match.params.showId;
+		alert(_showId);
+		axios.get('https://comedyhere-server.herokuapp.com/api/shows/' + _showId, { crossdomain: true }).then(res => {
 			// console.log(res);
 			this.setState({show: res.data, loadPending: false})
 		})

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-// import UserIntentModal from '../../user-intent/UserIntentBlankStateModal.js' //might use this
-
+import axios from 'axios'
 import Shows from '../../shows/Shows.js'
 
 let showsData = [{}, {}, {}];
@@ -8,6 +7,19 @@ let showsData = [{}, {}, {}];
 class ShowPage extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			show: null
+		}
+	}
+	componentDidMount() {
+		axios.get('https://comedyhere-server.herokuapp.com/api/shows/5bf588538ed49028e4bcda35', { crossdomain: true }).then(res => {
+			// console.log(res);
+			this.setState({show: res.data})
+		})
+		.catch(e => {
+			console.log(e)
+			alert("error")
+		})
 	}
 	render() {
 		return (

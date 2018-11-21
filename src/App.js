@@ -51,7 +51,6 @@ class App extends Component {
           <div className={"App" + (this.props.layout.sideOpen ? ' sideOpen' : '')}>
             <Nav sideOpen={this.props.layout.sideOpen} toggleSidenav={this.toggleSidenav} />
             <div className="main">
-              <span>Action</span>
               <Switch>
                 <Route path="/" 
                   exact 

@@ -10,7 +10,7 @@ function Show(props) {
 				</Link>
 				<div className="show__content__data">
 					<Link to={'/show/' + (props.show.id ? props.show.id : 'xyz' )} className="clear-link">
-						<span>Title</span>
+						<span>{props.show.title}</span>
 					</Link>
 					<Link to={'/show/edit/' + (props.show.id ? props.show.id : 'xyz' )} className="clear-link">
 						<span>Edit</span>

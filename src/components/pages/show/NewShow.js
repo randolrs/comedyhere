@@ -157,9 +157,7 @@ class NewShow extends Component {
 	updateFormData(key, value) {
 		let formData = this.state.showParams;
 		formData.set(key, value);
-		this.setState( { showParams: formData }, () => {
-			alert(this.state.showParams.get(key))
-		} );
+		this.setState( { showParams: formData } );
 	}
 	render() {
 		return (

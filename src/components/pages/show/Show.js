@@ -14,7 +14,6 @@ class ShowPage extends Component {
 	}
 	componentDidMount() {
 		let _showId = this.props.match.params.showId;
-		alert(_showId);
 		axios.get('https://comedyhere-server.herokuapp.com/api/shows/' + _showId, { crossdomain: true }).then(res => {
 			// console.log(res);
 			this.setState({show: res.data, loadPending: false})
@@ -26,17 +25,53 @@ class ShowPage extends Component {
 		})
 	}
 	render() {
+		let image = this.state.show && this.state.show.image ?
+			<div className="show-page__img" style={{ backgroundImage: "url(" + this.state.show.image + ")" }}></div>
+			: <div className="show-page__img">img</div>;
 		return (
 			<div className="content">
 				<div className="show-page">
 				{
-					this.state.loadPending ? 
-						<span>Loading</span>
-						: <span>Show Loaded</span>
+					this.state.loadPending ?
+						<span>Loading</span> :
+					this.state.show ?
+						<div>
+							<section>
+								{image}
+								<header className="content__page-header">{this.state.show.title}</header>
+								<div>
+									<span>Date/Time info</span>
+								</div>
+								<div>
+									<span>Baisc Location Information</span>
+								</div>
+								<div>
+									<span>Price</span>
+									<span>Type of show</span>
+									<span>in XYYZZ neighborhood</span>
+								</div>
+								<div>
+									<span>Perfect for:</span>
+									<span>Elise</span>
+									<span>[Tags]</span>
+								</div>
+								<div>
+									<span>Who performs here?</span>
+									<span>A new performer model</span>
+								</div>
+							</section>
+							<section>
+								<header>What comedy fans have to say about this show:</header>
+								<span>A V2 feature for sure</span>
+							</section>
+							<section>
+								<header>Related Shows</header>
+								<Shows shows={showsData} stacked={false} />
+							</section>
+						</div>
+					:
+						<span>Show not found</span>
 				}
-					<header>Show Page</header>
-					<div>Show Data</div>
-					<Shows shows={showsData} stacked={false} />
 				</div>
 			</div>
 		);

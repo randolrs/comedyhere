@@ -1,6 +1,6 @@
 .main
-	min-height: calc(100vh - #{$nav-height + $footer-clearance})
-	margin-top: $nav-height
+	min-height: calc(100vh - #{$nav-height + $nav-fancy-border-height + $footer-clearance})
+	margin-top: $nav-height + $nav-fancy-border-height
 	padding-bottom: $footer-clearance
 
 .centered
@@ -10,3 +10,6 @@
 	max-width: $max-content-width
 	margin: 0 auto
 	position: relative
+	&__page-header
+		font-size: 30px
+		font-weight: 700

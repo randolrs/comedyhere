@@ -28,7 +28,6 @@ class Show extends Component {
 		})
 	}
 	render() {
-		let imageStyle = 'background-image: ' + (this.props.show.image ? this.props.show.image : '');
 		let image = this.props.show.image ?
 			<div className="show__content__img" style={{ backgroundImage: "url(" + this.props.show.image + ")" }}></div>
 			: <div className="show__content__img">img</div>;

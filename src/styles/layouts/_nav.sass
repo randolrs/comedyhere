@@ -2,15 +2,24 @@
 	position: fixed
 	left: 0px
 	right: 0px
-	height: $nav-height
+	height: $nav-height + $nav-fancy-border-height
 	top: 0px
 	box-shadow: 0px 1px 5px rgba(0,0,0,0.2)
 	background: #fff
-	display: flex
+	&__fancy-top
+			height: $nav-fancy-border-height
+			background: #833ab4
+			background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4)
+			background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4)
+			box-shadow: inset 0px 0px 1px rgba(0,0,0,0.2)
+	&__content
+		display: flex
 	&__link
 		display: inline-block
 		padding: ($nav-height - $nav-link-line-height) / 2
 		line-height: $nav-link-line-height
+		color: #212121
+		text-decoration: none
 	&__left, &__right
 		flex: 1
 	&__right

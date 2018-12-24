@@ -7,7 +7,7 @@ class Show extends Component {
 	constructor(props) {
 		super(props);
 		let uuid = props.show.slug ? props.show.slug : props.show._id;
-	
+
 		this.state = {
 			deleted: false,
 			uuid: uuid
@@ -28,11 +28,16 @@ class Show extends Component {
 		})
 	}
 	render() {
+		let imageStyle = 'background-image: ' + (this.props.show.image ? this.props.show.image : '');
+		let image = this.props.show.image ?
+			<div className="show__content__img" style={{ backgroundImage: "url(" + this.props.show.image + ")" }}></div>
+			: <div className="show__content__img">img</div>;
+
 		return (
 				<div className={'show' + (this.props.stacked ? ' stacked' : '') + (this.state.deleted ? ' removed' : '')}>
 					<div className="show__content">
 						<Link to={'/show/' + this.state.uuid} className="clear-link">
-							<div className="show__content__img">img</div>
+							{ image }
 						</Link>
 						<div className="show__content__data">
 							<Link to={'/show/' + this.state.uuid} className="clear-link">
@@ -44,7 +49,7 @@ class Show extends Component {
 							<span onClick={this.deleteShow}>Delete</span>
 						</div>
 					</div>
-				</div>		
+				</div>
 		);
 	}
 }

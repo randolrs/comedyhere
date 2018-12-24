@@ -1,5 +1,5 @@
 import initialState from '../store/initialState';
-import {TOGGLE_SIDENAV} from '../actions/actionTypes';
+import { TOGGLE_SIDENAV } from '../actions/actionTypes';
 
 export default function layout(state = initialState, action) {
   let newState;

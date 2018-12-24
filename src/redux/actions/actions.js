@@ -1,9 +1,5 @@
 import * as types from './actionTypes';
 
-function url() {
-  return 'www.url.com';
-}
-
 export function closeSidenav() {
   return {type: types.TOGGLE_SIDENAV, payload: false};
 }

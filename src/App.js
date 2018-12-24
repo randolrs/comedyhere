@@ -28,11 +28,7 @@ import Missing from './components/missing/Missing.js'
 class App extends Component {
   constructor(props) {
     super(props);
-    // let _showUserIntentModal = (this.props.layout.userIntent === null);
-    // this.state = {date: new Date(), showUserIntentModal: _showUserIntentModal};
-    
     this.toggleSidenav = this.toggleSidenav.bind(this);
-
   }
   componentWillMount() {
 
@@ -51,8 +47,8 @@ class App extends Component {
             <Nav sideOpen={this.props.layout.sideOpen} toggleSidenav={this.toggleSidenav} />
             <div className="main">
               <Switch>
-                <Route path="/" 
-                  exact 
+                <Route path="/"
+                  exact
                   render={(props) => <Home {...props} userIntent={this.props.layout.userIntent} />}
                 userIntent={this.props.layout.userIntent} />
                 <Route path="/about" component={About} />

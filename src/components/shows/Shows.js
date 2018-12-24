@@ -7,7 +7,7 @@ function Shows(props) {
 			<div className={'shows' + (props.stacked ? ' stacked' : '')}>
 				{
 					props.shows.map((elem, index) => {
-						return <Show show={elem} stacked={props.stacked} key={index} />
+						return <Show show={elem} stacked={props.stacked} key={elem._id} />
 					})
 				}
 			</div>

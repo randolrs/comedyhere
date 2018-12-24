@@ -17,11 +17,13 @@ function Show(props) {
 			// this.setState({loadPending: false})
 		})
 	}
+	let showImg = props.show.image ? <img src={props.show.image} alt={props.show.name} /> : <div className="show__content__img">665</div>;
+
 	return (
 		<div className={'show' + (props.stacked ? ' stacked' : '')}>
 			<div className="show__content">
 				<Link to={'/show/' + uuid} className="clear-link">
-					<div className="show__content__img">img</div>
+					{showImg}
 				</Link>
 				<div className="show__content__data">
 					<Link to={'/show/' + uuid} className="clear-link">

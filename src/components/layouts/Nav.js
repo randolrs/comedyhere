@@ -25,6 +25,13 @@ class Nav extends Component {
 						<Link to="/show/new" className="nav__link">
 							<span>Add a Show</span>
 						</Link>
+
+						<Link to="/shows/list" className="nav__link cta">
+							<span>CTA</span>
+						</Link>
+						<Link to="/show/new" className="nav__link">
+							<span>Location</span>
+						</Link>
 					</div>
 				</div>
 		  </nav>

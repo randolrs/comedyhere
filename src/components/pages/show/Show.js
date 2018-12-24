@@ -36,8 +36,9 @@ class ShowPage extends Component {
 						<span>Loading</span> :
 					this.state.show ?
 						<div>
-							<section>
-								{image}
+							{image}
+							<section className="content__section">
+
 								<header className="content__page-header">{this.state.show.title}</header>
 								<div>
 									<span>Date/Time info</span>
@@ -60,11 +61,11 @@ class ShowPage extends Component {
 									<span>A new performer model</span>
 								</div>
 							</section>
-							<section>
+							<section className="content__section">
 								<header>What comedy fans have to say about this show:</header>
 								<span>A V2 feature for sure</span>
 							</section>
-							<section>
+							<section className="content__section">
 								<header>Related Shows</header>
 								<Shows shows={showsData} stacked={false} />
 							</section>

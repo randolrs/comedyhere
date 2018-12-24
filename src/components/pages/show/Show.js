@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import Shows from '../../shows/Shows.js'
+import axios from 'axios';
+import Shows from '../../shows/Shows.js';
+import GoogleApiWrapper from '../../maps/GoogleApiWrapper.js';
 
 let showsData = [{}, {}, {}];
 
@@ -38,13 +39,13 @@ class ShowPage extends Component {
 						<div>
 							{image}
 							<section className="content__section">
-
 								<header className="content__page-header">{this.state.show.title}</header>
 								<div>
 									<span>Date/Time info</span>
 								</div>
 								<div>
 									<span>Baisc Location Information</span>
+									<GoogleApiWrapper />
 								</div>
 								<div>
 									<span>Price</span>

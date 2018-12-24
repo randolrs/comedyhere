@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import LocationSearchInput from '../../maps/LocationSearchInput.js';
+import axios from 'axios';
 
 import Input from '../../forms/Input.js';
 
@@ -10,17 +11,6 @@ class NewShow extends Component {
 		const formData = new FormData();
 
 		this.state = {
-			// showParams: {
-			// 	title: '',
-			// 	description: '',
-			// 	eventURL: '',
-			// 	venueName: '',
-			// 	address: '',
-			// 	videoPreview: '',
-			// 	videoDescription: '',
-			// 	reasonRecommend: '',
-      //   file: null
-			// },
 			showParams: formData,
 			saving: false,
 			editMode: editMode,
@@ -36,7 +26,7 @@ class NewShow extends Component {
 		this.handleVideoDescriptionUpdate = this.handleVideoDescriptionUpdate.bind(this);
 		this.handleReasonRecommendUpdate = this.handleReasonRecommendUpdate.bind(this);
     this.handleImageUpdate = this.handleImageUpdate.bind(this);
-
+		this.handleLocationSearchUpdate = this.handleLocationSearchUpdate.bind(this);
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -154,6 +144,12 @@ class NewShow extends Component {
     //       {...prevState.showParams, file: value}
     //     }))
   }
+
+	handleLocationSearchUpdate(latLng) {
+		this.updateFormData('addressLat', latLng['lat']);
+		this.updateFormData('addressLong', latLng['lng']);
+	}
+
 	updateFormData(key, value) {
 		let formData = this.state.showParams;
 		formData.set(key, value);
@@ -194,6 +190,9 @@ class NewShow extends Component {
 								type={'text'}
 								// value={this.state.showParams.venueName || ''}
 								handleChange={this.handleVenueNameUpdate}
+							/>
+							<LocationSearchInput
+								handleLocationSearchUpdate={this.handleLocationSearchUpdate}
 							/>
 							<Input
 								title={'Venue Address'}

@@ -147,7 +147,7 @@ class NewShow extends Component {
 
 	handleLocationSearchUpdate(latLng) {
 		this.updateFormData('addressLat', latLng['lat']);
-		this.updateFormData('addressLong', latLng['lng']);
+		this.updateFormData('addressLng', latLng['lng']);
 	}
 
 	updateFormData(key, value) {

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Shows from '../../shows/Shows.js';
 import GoogleApiWrapper from '../../maps/GoogleApiWrapper.js';
+import styled from 'styled-components';
 
 let showsData = [{}, {}, {}];
 
@@ -40,12 +41,21 @@ class ShowPage extends Component {
 							{image}
 							<section className="content__section">
 								<header className="content__page-header">{this.state.show.title}</header>
+								{
+									this.state.show.description ?
+									<div>
+										<p>{this.state.show.description}</p>
+									</div> :
+									null
+								}
 								<div>
 									<span>Date/Time info</span>
 								</div>
 								<div>
 									<span>Baisc Location Information</span>
-									<GoogleApiWrapper />
+									<MapWrapper>
+										<GoogleApiWrapper />
+									</MapWrapper>
 								</div>
 								<div>
 									<span>Price</span>
@@ -79,5 +89,13 @@ class ShowPage extends Component {
 		);
 	}
 }
+
+const MapWrapper = styled.div`
+		  position: relative;
+			width: 100%;
+			height: 200px;
+`;
+
+
 
 export default ShowPage;

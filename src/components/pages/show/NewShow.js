@@ -80,6 +80,7 @@ class NewShow extends Component {
 			})
 		}
 	}
+
 	handleTitleUpdate(e) {
 		let value = e.target.value;
 		this.updateFormData('title', value);

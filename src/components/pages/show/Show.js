@@ -54,7 +54,10 @@ class ShowPage extends Component {
 								<div>
 									<span>Baisc Location Information</span>
 									<MapWrapper>
-										<GoogleApiWrapper />
+										<GoogleApiWrapper
+											initialCenter={{ lat: this.state.show.addressLat, lng: this.state.show.addressLng }}
+											currentLocation={{ lat: this.state.show.addressLat, lng: this.state.show.addressLng }}
+										/>
 									</MapWrapper>
 								</div>
 								<div>
@@ -95,7 +98,5 @@ const MapWrapper = styled.div`
 			width: 100%;
 			height: 200px;
 `;
-
-
 
 export default ShowPage;
